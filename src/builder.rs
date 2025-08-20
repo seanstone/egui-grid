@@ -142,14 +142,14 @@ impl GridBuilder {
     /// Add a cell to the most recently allocated row. Cells are represented left-to-right.
     /// Does nothing unless at least one row has been allocated.
     pub fn cell(mut self, size: Size) -> Self {
-        self.add_cells(size, 1, Margin::same(0.));
+        self.add_cells(size, 1, Margin::same(0. as i8));
         self
     }
 
     /// Add multiple cells all with the same size to the most recently allocated row. Cells are represented left-to-right.
     /// Does nothing unless at least one row has been allocated.
     pub fn cells(mut self, size: Size, amount: i32) -> Self {
-        self.add_cells(size, amount, Margin::same(0.));
+        self.add_cells(size, amount, Margin::same(0. as i8));
         self
     }
 
@@ -364,10 +364,10 @@ impl GridBuilder {
 
                 // Apply margins
                 let margin = &(row.cells[cell_index].margin);
-                rect.min.x += margin.left;
-                rect.min.y += margin.top;
-                rect.max.x -= margin.right;
-                rect.max.y -= margin.bottom;
+                rect.min.x += margin.left as f32;
+                rect.min.y += margin.top as f32;
+                rect.max.x -= margin.right as f32;
+                rect.max.y -= margin.bottom as f32;
 
                 // Check and handle nested grids
                 match &row.cells[cell_index].group {
